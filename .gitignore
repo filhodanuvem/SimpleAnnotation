@@ -1,0 +1,3 @@
+#ignoring cached files#
+*.cache.block
+*.cache.prop
