@@ -11,52 +11,64 @@ echo <<<'HEAD'
 	This project (with a filosophy <a href="#">MicroPHP manifesto</a> "where small and simple is better") have a goal of
 	be a simple layer for insert annotations in other php small projects.<br /><br />     
 HEAD;
-
-
-// using a Model examples
 use Model as m;
+if(!array_key_exists('page', $_GET)){
 
-echo 'The Foo class contain a field $value, we use annotation @var to define that  this attributte is of integer type';
-highlight_string('
-<?php 
-class Foo extends Model 
-{
-	/**
-	* @var int
-	*/
-	protected $value;
+	// using a Model examples
 	
-	public function getValue(){
-		return $this->value;
+	
+	echo 'The Foo class contain a field $value, we use annotation @var to define that  this attributte is of integer type';
+	highlight_string('
+	<?php 
+	class Foo extends Model 
+	{
+		/**
+		* @var int
+		*/
+		protected $value;
+		
+		public function getValue(){
+			return $this->value;
+		}
+		
+		public function setValue($value){
+			$this->value = $value;
+		}
+		
 	}
 	
-	public function setValue($value){
-		$this->value = $value;
-	}
+	?>');
+	$foo = new m\Foo();
+	$foo->setValue(3);
 	
+	echo '<br /><br />Right now, we created a Foo object and setting your field $value like a integer<br />';
+	highlight_string('
+	<?php 
+		use Model as m;
+	    $foo = new m\Foo();
+	    $foo->setValue(3); 
+	?>');
+	
+	echo '<br /><br />So, we use save method, like a Active record pattern. Automatically we have a status array that inform us about each field';
+	highlight_string('
+	<?php 
+	    $foo->save(); 
+	?>');
+	$foo->save();
+	var_dump($foo);
+	
+	echo '<br /><br />But, if $value was setted with a string value we would the next result:';
+	$foo->setValue('bar');
+	$foo->save();
+	var_dump($foo);
+	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="?page=validators">read more</a>';
+}else{
+	switch($_GET['page']){
+		
+		case 'validators':
+			echo '<br /><h3>The Validators</h3>';
+			break;
+		default:
+			echo 'ERROR!';
+	}
 }
-
-?>');
-$foo = new m\Foo();
-$foo->setValue(3);
-
-echo '<br /><br />Right now, we created a Foo object and setting your field $value like a integer<br />';
-highlight_string('
-<?php 
-	use Model as m;
-    $foo = new m\Foo();
-    $foo->setValue(3); 
-?>');
-
-echo '<br /><br />So, we use save method, like a Active record pattern. Automatically we have a status array that inform us about each field';
-highlight_string('
-<?php 
-    $foo->save(); 
-?>');
-$foo->save();
-var_dump($foo);
-
-echo '<br /><br />But, if $value was setted with a string value we would the next result:';
-$foo->setValue('bar');
-$foo->save();
-var_dump($foo);
