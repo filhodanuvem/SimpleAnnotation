@@ -16,52 +16,34 @@ if(!array_key_exists('page', $_GET)){
 
 	// using a Model examples
 	
+	echo '<h3>How to use</h3>';
+	echo 'Requirements <hr /> 
+	<ul>
+		<li>PHP 5.3+</li>
+		<li>Respect\Validation library</li>
+	</ul>';
 	
-	echo 'The Foo class contain a field $value, we use annotation @var to define that  this attributte is of integer type';
+	echo 'Reserved annotations<hr />
+	<ul>
+		<li>@validation - Use Respect\Validation to test value</li>
+	</ul>
+	';
+	
+	echo 'Using<hr />
+		First we setting the paths to autoload using SplClassLoader.<br />';
 	highlight_string('
 	<?php 
-	class Foo extends Model 
-	{
-		/**
-		* @var int
-		*/
-		protected $value;
-		
-		public function getValue(){
-			return $this->value;
-		}
-		
-		public function setValue($value){
-			$this->value = $value;
-		}
-		
-	}
-	
+		set_include_path(\'/my/library\' . PATH_SEPARATOR . \'/path/to/respect\' . PATH_SEPARATOR . get_include_path());
+		require_once \'SplClassLoader.php\';
+		$myLoader = new \SplClassLoader();
+		$myLoader->register();
 	?>');
-	$foo = new m\Foo();
-	$foo->setValue(3);
-	
-	echo '<br /><br />Right now, we created a Foo object and setting your field $value like a integer<br />';
+	echo '<br /><br />SimpleAnnotation is namespaced, but you can make your life easier by importing a single class into your context: <br />';
 	highlight_string('
 	<?php 
-		use Model as m;
-	    $foo = new m\Foo();
-	    $foo->setValue(3); 
-	?>');
+		use SimpleAnnotation\Annotation as annot; ');
+	echo '<br /><br />';
 	
-	echo '<br /><br />So, we use save method, like a Active record pattern. Automatically we have a status array that inform us about each field';
-	highlight_string('
-	<?php 
-	    $foo->save(); 
-	?>');
-	$foo->save();
-	var_dump($foo);
-	
-	echo '<br /><br />But, if $value was setted with a string value we would the next result:';
-	$foo->setValue('bar');
-	$foo->save();
-	var_dump($foo);
-	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="?page=core">read more</a>';
 }else{
 	switch($_GET['page']){
 		
@@ -70,9 +52,53 @@ if(!array_key_exists('page', $_GET)){
             echo 'The SimpleAnnotation use <a href="https://github.com/Respect/Validation">Respect\Validation</a>, the most awesome validation engine ever created for PHP.
 In this library. ';
 			break;
-        case 'core':
-            echo '<br /><h3>The Core</h3>';
-            break;
+        case 'example':
+            // using a Model examples
+	
+			echo 'The Foo class contain a field $value, we use annotation @var to define that  this attributte is of integer type';
+			highlight_string('
+			<?php 
+			class Foo extends Model 
+			{
+				/**
+				* @var int
+				*/
+				protected $value;
+				
+				public function getValue(){
+					return $this->value;
+				}
+				
+				public function setValue($value){
+					$this->value = $value;
+				}
+				
+			}
+			?>');
+			$foo = new m\Foo();
+			$foo->setValue(3);
+			
+			echo '<br /><br />Right now, we created a Foo object and setting your field $value like a integer<br />';
+			highlight_string('
+			<?php 
+				use Model as m;
+				$foo = new m\Foo();
+				$foo->setValue(3); 
+			?>');
+			
+			echo '<br /><br />So, we use save method, like a Active record pattern. Automatically we have a status array that inform us about each field';
+			highlight_string('
+			<?php 
+				$foo->save(); 
+			?>');
+			$foo->save();
+			var_dump($foo);
+			
+			echo '<br /><br />But, if $value was setted with a string value we would the next result:';
+			$foo->setValue('bar');
+			$foo->save();
+			var_dump($foo);
+	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="?page=core">read more</a>';
 		default:
 			echo 'ERROR!';
 	}

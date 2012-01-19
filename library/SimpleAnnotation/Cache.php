@@ -51,7 +51,7 @@ class Cache
 		$folder = __DIR__.'/cache/';
 		if(!is_dir($folder)){
 			mkdir($folder);
-			
+			chmod($folder,0744);
 		}
 		
 		$fileBlock = $folder.$annot->getNameTarget().'.block.cache';
