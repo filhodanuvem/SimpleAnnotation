@@ -61,13 +61,18 @@ if(!array_key_exists('page', $_GET)){
 	$foo->setValue('bar');
 	$foo->save();
 	var_dump($foo);
-	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="?page=validators">read more</a>';
+	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="?page=core">read more</a>';
 }else{
 	switch($_GET['page']){
 		
 		case 'validators':
 			echo '<br /><h3>The Validators</h3>';
+            echo 'The SimpleAnnotation use <a href="https://github.com/Respect/Validation">Respect\Validation</a>, the most awesome validation engine ever created for PHP.
+In this library. ';
 			break;
+        case 'core':
+            echo '<br /><h3>The Core</h3>';
+            break;
 		default:
 			echo 'ERROR!';
 	}
