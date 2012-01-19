@@ -42,7 +42,14 @@ if(!array_key_exists('page', $_GET)){
 	highlight_string('
 	<?php 
 		use SimpleAnnotation\Annotation as annot; ');
-	echo '<br /><br />';
+	echo '<br /><br />Now you are ready for to use this library. <br /><br />';
+	highlight_string('
+	<?php 
+		// first, we create the objeto that you want to use annotation
+		$foo = new Foo();
+		$a = new annot($foo);
+		$a->validate();
+	');
 	
 }else{
 	switch($_GET['page']){

@@ -58,7 +58,7 @@ class Annotation
     	return $this->properties;
     }
     
-    public function filter()
+    public function validate()
     {
         $this->status = array();
         foreach($this->properties as $attr => $p){
