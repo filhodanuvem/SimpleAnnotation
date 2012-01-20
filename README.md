@@ -31,11 +31,11 @@ Installation
 **CAUTION**, this is not ready for production! Use it just for fun until a 
 stable version comes out.
 
-cd /var/www/
-git clone git@github.com:cloudson/SimpleAnnotation.git #cloning repo
-cd SimpleAnnotation/ 
-git submodule init 
-git submodule update #updating Vendors 
+cd /var/www/ <br />
+git clone git@github.com:cloudson/SimpleAnnotation.git #cloning repo <br />
+cd SimpleAnnotation/  <br />
+git submodule init  <br />
+git submodule update  #updating Vendors <br />
 
 
 Autoloading
@@ -58,19 +58,19 @@ Namespace import
 
 SimpleAnnotation is namespaced, you can use it:
 
-    <?php
-        use SimpleAnnotation\Annotation as annot;
+    <?php 
+        use SimpleAnnotation\Annotation as annot; <br />
 
 Using
 -----------------
 
 <?php 
-    // first, we create the objeto that you want to use annotation (we used namespace again)
-    use Model as m;
-    $foo = new m\Person();
-    $foo->setName('Claudson');
-    $a = new annot($foo);
-    // using default validate method that tests if all fields is valid values.
-    $a->validate();
+    // first, we create the objeto that you want to use annotation (we used namespace again) <br />
+    use Model as m; <br />
+    $foo = new m\Person(); <br />
+    $foo->setName('Claudson'); <br />
+    $a = new annot($foo); <br />
+    // using default validate method that tests if all fields is valid values. <br />
+    $a->validate(); <br />
     
 
