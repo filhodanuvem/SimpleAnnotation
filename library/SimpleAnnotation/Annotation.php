@@ -68,6 +68,7 @@ class Annotation
                 $this->status[$attr] = v::$validator()->validate($this->target->$access());
             }
         }
+        return $this->status;
     }
     
     public function getHash()

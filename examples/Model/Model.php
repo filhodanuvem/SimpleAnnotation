@@ -9,7 +9,7 @@ class Model
 	public function save()
 	{
 		$annot = new annot($this);
-		$annot->filter();
+		$annot->validate();
 		$this->status = $annot->getStatus();
 		
 	}

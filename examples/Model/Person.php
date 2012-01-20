@@ -14,8 +14,6 @@ class Person extends Model
 	protected $name;
 	
 	/**
-	 *
-	 *
 	 * @var cpf
 	 */
 	protected $cpf;

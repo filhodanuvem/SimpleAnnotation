@@ -3,15 +3,19 @@
 require_once 'config.php';
 
 echo <<<'HEAD'
+    <head>
+        <title>SimpleAnnotation - Help</title>
+    </head>
 	<h2>SimpleAnnotation</h2>
 	A small php project that insert semantic on classes using annotations.<br />
 	Today, many programming languages are using annotations for to manager injection depending and
-    inversion of control. In the php's core, we haven't this feature, but some projects like <a href="#">Symphony</a> 
-    <a href="#">Doctrine</a> and <a href="#">DocBlox</a> was implement.
-	This project (with a filosophy <a href="#">MicroPHP manifesto</a> "where small and simple is better") have a goal of
+    inversion of control. In the php's core, we haven't this feature, but some projects like <a target="_blank" href="http://symfony.com/">Symfony</a> 
+    <a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a> and <a href="http://www.docblox-project.org/" target="_blank">Docblox</a> was implement.
+	This project (with a filosophy <a href="http://microphp.org/" target="_blank">MicroPHP manifesto</a> "where small and simple is better") have a goal of
 	be a simple layer for insert annotations in other php small projects.<br /><br />     
 HEAD;
 use Model as m;
+use SimpleAnnotation\Annotation as annot;
 if(!array_key_exists('page', $_GET)){
 
 	// using a Model examples
@@ -29,8 +33,52 @@ if(!array_key_exists('page', $_GET)){
 	</ul>
 	';
 	
-	echo 'Using<hr />
-		First we setting the paths to autoload using SplClassLoader.<br />';
+	echo 'Using<hr />';
+    echo 'Look the simple class Person <br /><br />';
+    highlight_string('<?php
+        namespace Model;
+
+        class Person extends Model
+        {
+            /**
+            * @var int
+            */
+            protected $id;
+            /**
+             * @var string
+             */
+            protected $name;
+            
+            /**
+             * @var cpf
+             */
+            protected $cpf;
+            
+            public function getId(){
+                return $this->id;
+            }
+            
+            public function setId($value){
+                $this->id = $value;
+            }
+            
+            public function getName(){
+                return $this->name;
+            }
+            
+            public function setName($value){
+                $this->name = $value;
+            }
+            
+            public function setCpf($value){
+                $this->cpf = $value;
+            }
+            
+            public function getCpf(){
+                return $this->cpf;
+            }	
+        }');
+    echo '<br /><br />First we setting the paths to autoload using SplClassLoader.<br />';
 	highlight_string('
 	<?php 
 		set_include_path(\'/my/library\' . PATH_SEPARATOR . \'/path/to/respect\' . PATH_SEPARATOR . get_include_path());
@@ -45,12 +93,20 @@ if(!array_key_exists('page', $_GET)){
 	echo '<br /><br />Now you are ready for to use this library. <br /><br />';
 	highlight_string('
 	<?php 
-		// first, we create the objeto that you want to use annotation
-		$foo = new Foo();
+		// first, we create the objeto that you want to use annotation (we used namespace again)
+        use Model as m;
+		$foo = new m\Person();
+        $foo->setName(\'Claudson\');
 		$a = new annot($foo);
+        // using default validate method that tests if all fields is valid values.
 		$a->validate();
 	');
-	
+    $foo = new m\Person();
+    $foo->setName('Claudson');
+    $a   = new annot($foo);
+    var_dump($a->validate());
+	echo '<br /><br />Right now, this method validate() returned a array with a status of the each attribute noted<br />
+    <a href="?page=example">Read a pratical example</a>';
 }else{
 	switch($_GET['page']){
 		
@@ -105,8 +161,9 @@ In this library. ';
 			$foo->setValue('bar');
 			$foo->save();
 			var_dump($foo);
-	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="?page=core">read more</a>';
-		default:
+	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="https://github.com/Respect/Validation" target="_blank">read more</a>';
+            break;
+        default:
 			echo 'ERROR!';
 	}
 }
