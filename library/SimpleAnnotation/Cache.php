@@ -19,7 +19,7 @@ class Cache
 	 */
 	public function getCacheBlock(Annotation $annot)
 	{
-		$folder = __DIR__.'/cache/';
+		$folder = __DIR__.'/.cache/';
 		if(!is_dir($folder)){
 			return null;
 		}
@@ -34,7 +34,7 @@ class Cache
 	
 	public function getCache(Annotation $annot)
 	{
-		$folder = __DIR__.'/cache/';
+		$folder = __DIR__.'/.cache/';
 		if(!is_dir($folder)){
 			return null;
 		}

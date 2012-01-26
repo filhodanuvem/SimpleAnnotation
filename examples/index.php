@@ -16,6 +16,7 @@ echo <<<'HEAD'
 HEAD;
 use Model as m;
 use SimpleAnnotation\Annotation as annot;
+use SimpleAnnotation\Exceptions as ex;
 if(!array_key_exists('page', $_GET)){
 
 	// using a Model examples
@@ -102,9 +103,13 @@ if(!array_key_exists('page', $_GET)){
 		$a->validate();
 	');
     $foo = new m\Person();
-    $foo->setName('Claudson');
+    $foo->setName("claudson");
     $a   = new annot($foo);
-    var_dump($a->validate());
+    try{
+        var_dump($a->validate());
+    }catch(ex\AnnotationValidationException $e){
+        var_dump($e->getMessage());
+    }
 	echo '<br /><br />Right now, this method validate() returned a array with a status of the each attribute noted<br />
     <a href="?page=example">Read a pratical example</a>';
 }else{

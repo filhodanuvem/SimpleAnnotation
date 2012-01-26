@@ -6,6 +6,7 @@
 *
 */
 namespace SimpleAnnotation ;
+use SimpleAnnotation\Exceptions as ex;
 use Respect\Validation\Validator as v;
 
 class Annotation
@@ -68,7 +69,9 @@ class Annotation
                 $this->status[$attr] = v::$validator()->validate($this->target->$access());
             }
         }
-        return $this->status;
+         if(array_search(true,$this->status) === false)
+            throw new ex\AnnotationValidationException($this->status);
+        return true;
     }
     
     public function getHash()
