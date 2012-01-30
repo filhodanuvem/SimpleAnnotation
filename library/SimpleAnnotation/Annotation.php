@@ -7,7 +7,7 @@
 */
 namespace SimpleAnnotation ;
 use SimpleAnnotation\Exceptions as ex;
-use Respect\Validation\Validator as v;
+use Respect\Validation as v;
 
 class Annotation
 {
@@ -63,10 +63,17 @@ class Annotation
     {
         $this->status = array();
         foreach($this->properties as $attr => $p){
-            if($p){
-                $validator = $p['var'];
+            if($p && array_key_exists('validate',$p)){
+                $validator = new v\Validator();
+                try{
+                    $validator = $validator->buildRule($p['validate']);
+                }catch(Exception $e){
+                    echo $e->getMessage();
+                    continue;
+                }
                 $access    = 'get'.ucfirst($attr);
-                $this->status[$attr] = v::$validator()->validate($this->target->$access());
+                $this->status[$attr] = $validator->validate($this->target->$access());
+                
             }
         }
          if(array_search(true,$this->status) === false)

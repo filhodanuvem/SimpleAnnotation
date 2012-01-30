@@ -2,7 +2,7 @@ SimpleAnnotation
 ==================
 
 A small php project that insert semantic on classes using annotations.<br />
-Today, many programming languages are using annotations for to manager injection depending and
+Today, many programming languages are using annotations for to manager dependency Injection and
 inversion of control. In the php's core, we haven't this feature, but some projects like <a target="_blank" href="http://symfony.com/">Symfony</a> 
 <a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a> and <a href="http://www.docblox-project.org/" target="_blank">Docblox</a> was implement.
 This project (with a filosophy <a href="http://microphp.org/" target="_blank">MicroPHP manifesto</a> "where small and simple is better") have a goal of

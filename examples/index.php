@@ -8,7 +8,7 @@ echo <<<'HEAD'
     </head>
 	<h2>SimpleAnnotation</h2>
 	A small php project that insert semantic on classes using annotations.<br />
-	Today, many programming languages are using annotations for to manager injection depending and
+	Today, many programming languages are using annotations for to manager dependency Injection and
     inversion of control. In the php's core, we haven't this feature, but some projects like <a target="_blank" href="http://symfony.com/">Symfony</a> 
     <a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a> and <a href="http://www.docblox-project.org/" target="_blank">Docblox</a> was implement.
 	This project (with a filosophy <a href="http://microphp.org/" target="_blank">MicroPHP manifesto</a> "where small and simple is better") have a goal of
@@ -42,16 +42,16 @@ if(!array_key_exists('page', $_GET)){
         class Person extends Model
         {
             /**
-            * @var int
+            * @validate int
             */
             protected $id;
             /**
-             * @var string
+             * @validate string
              */
             protected $name;
             
             /**
-             * @var cpf
+             * @validate cpf
              */
             protected $cpf;
             
@@ -100,7 +100,11 @@ if(!array_key_exists('page', $_GET)){
         $foo->setName(\'Claudson\');
 		$a = new annot($foo);
         // using default validate method that tests if all fields is valid values.
-		$a->validate();
+		try{
+            var_dump($a->validate());
+        }catch(ex\AnnotationValidationException $e){
+            var_dump($e->getMessage());
+        }
 	');
     $foo = new m\Person();
     $foo->setName("claudson");
@@ -110,7 +114,7 @@ if(!array_key_exists('page', $_GET)){
     }catch(ex\AnnotationValidationException $e){
         var_dump($e->getMessage());
     }
-	echo '<br /><br />Right now, this method validate() returned a array with a status of the each attribute noted<br />
+	echo '<br /><br />Right now, this method validate() returned true if all attributes is ok. Else, a exception go up!<br />
     <a href="?page=example">Read a pratical example</a>';
 }else{
 	switch($_GET['page']){
@@ -159,12 +163,20 @@ In this library. ';
 			<?php 
 				$foo->save(); 
 			?>');
-			$foo->save();
+            try{
+                $foo->save();
+            }catch(AnnotationValidationException $e){
+                echo $e->getMessage();
+            }
 			var_dump($foo);
 			
 			echo '<br /><br />But, if $value was setted with a string value we would the next result:';
 			$foo->setValue('bar');
-			$foo->save();
+			try{
+                $foo->save();
+            }catch(AnnotationValidationException $e){
+                echo $e->getMessage();
+            }
 			var_dump($foo);
 	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="https://github.com/Respect/Validation" target="_blank">read more</a>';
             break;

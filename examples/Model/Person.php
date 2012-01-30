@@ -5,16 +5,16 @@ namespace Model;
 class Person extends Model
 {
 	/**
-	* @var int
+	* @validate int
 	*/
 	protected $id;
 	/**
-	 * @var string
+	 * @validate string
 	 */
 	protected $name;
 	
 	/**
-	 * @var cpf
+	 * @validate image
 	 */
 	protected $cpf;
 	
