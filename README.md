@@ -16,11 +16,11 @@ Requirements
 
 Reserved annotations
 -------
-@validation - Use Respect\Validation to test value
+@validate - Use Respect\Validation to test value
 
 TO DO
 -------
-- Add new semantic rules, for example: @var date('Y-m-d H:i:s') for create um Validator better.
+- Add new semantic rules, for example: @validate date('Y-m-d H:i:s') for create um Validator better.
 - Use a APC or other cache manager 
 - Use the Reader from Doctrine 
 

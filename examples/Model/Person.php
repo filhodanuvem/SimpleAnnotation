@@ -14,7 +14,7 @@ class Person extends Model
 	protected $name;
 	
 	/**
-	 * @validate image
+	 * @validate cpf
 	 */
 	protected $cpf;
 	
