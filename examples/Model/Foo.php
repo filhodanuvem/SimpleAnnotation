@@ -1,7 +1,5 @@
 <?php
 /**
- * 
- * 
  * @author Claudson Oliveira
  *
  */
@@ -9,7 +7,7 @@ namespace Model;
 class Foo extends Model 
 {
 	/**
-	* @var int
+	* @validate int
 	*/
 	protected $value;
 	

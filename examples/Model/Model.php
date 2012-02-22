@@ -10,7 +10,7 @@ class Model
 	public function save() 
 	{
 		$annot = new annot($this);
-		$annot->validate();
+		var_dump($annot->validate());
 		$this->status = $annot->getStatus();
 		
 	}

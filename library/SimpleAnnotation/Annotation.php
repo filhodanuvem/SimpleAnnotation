@@ -6,9 +6,6 @@
 *
 */
 namespace SimpleAnnotation ;
-use SimpleAnnotation\Exceptions as ex;
-use Respect\Validation as v;
-
 class Annotation
 {
     protected $reflection; 
@@ -59,26 +56,11 @@ class Annotation
     	return $this->properties;
     }
     
-    public function validate()
+    public function __call($name,$attr)
     {
-        $this->status = array();
-        foreach($this->properties as $attr => $p){
-            if($p && array_key_exists('validate',$p)){
-                $validator = new v\Validator();
-                try{
-                    $validator = $validator->buildRule($p['validate']);
-                }catch(Exception $e){
-                    echo $e->getMessage();
-                    continue;
-                }
-                $access    = 'get'.ucfirst($attr);
-                $this->status[$attr] = $validator->validate($this->target->$access());
-                
-            }
-        }
-         if(array_search(true,$this->status) === false)
-            throw new ex\AnnotationValidationException($this->status);
-        return true;
+        $name = 'SimpleAnnotation\Rules\\'.ucfirst($name);
+        $rule = new $name ;
+        $rule->execute($this);
     }
     
     public function getHash()
@@ -91,12 +73,28 @@ class Annotation
     	return str_replace(' ', '',serialize($this->blocks));
     }
     
-    public function getStatus(){
+    public function setStatus(Array $status)
+    {
+        $this->status = $status;
+    }
+    
+    public function getStatus()
+    {
         return $this->status;
     }
     
-    public function getNameTarget(){
+    public function getNameTarget()
+    {
     	return $this->reflection->getName();
+    }
+    
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+    
+    public function getTarget(){
+        return $this->target;
     }
 
 }

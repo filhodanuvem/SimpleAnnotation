@@ -1,24 +1,22 @@
 <?php
 
 /**
- * Enter description here ...
- * @author cloud
+ * @author Claudson Oliveira
  *
  */
 namespace Model;
 class Bar extends Model {
 	/**
 	 * 
-	 * Enter description here ...
-	 * @var date
+	 * @validate date
 	 */
-	protected $data;
+	protected $date;
 	
-	public function getData(){
-		return $this->data;
+	public function getDate(){
+		return $this->date;
 	}
 	
-	public function setData($value){
+	public function setDate($value){
 		$this->data = $value;
 	}
 	

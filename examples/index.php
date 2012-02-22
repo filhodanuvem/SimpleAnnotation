@@ -9,9 +9,9 @@ echo <<<'HEAD'
 	<h2>SimpleAnnotation</h2>
 	A small php project that insert semantic on classes using annotations.<br />
 	Today, many programming languages are using annotations for to manager dependency Injection and
-    inversion of control. In the php's core, we haven't this feature, but some projects like <a target="_blank" href="http://symfony.com/">Symfony</a> 
+    inversion of control. In the php's core, we haven't this feature, but some projects like <a target="_blank" href="http://symfony.com/">Symfony</a>, 
     <a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a> and <a href="http://www.docblox-project.org/" target="_blank">Docblox</a> was implement.
-	This project (with a filosophy <a href="http://microphp.org/" target="_blank">MicroPHP manifesto</a> "where small and simple is better") have a goal of
+	This project (with a philosophy <a href="http://microphp.org/" target="_blank">MicroPHP manifesto</a> "where small and simple is better") have a goal of
 	be a simple layer for insert annotations in other php small projects.<br /><br />     
 HEAD;
 use Model as m;
@@ -94,7 +94,7 @@ if(!array_key_exists('page', $_GET)){
 	echo '<br /><br />Now you are ready for to use this library. <br /><br />';
 	highlight_string('
 	<?php 
-		// first, we create the objeto that you want to use annotation (we used namespace again)
+		// first, we create the object that you want to use annotation (we used namespace again)
         use Model as m;
 		$foo = new m\Person();
         $foo->setName(\'Claudson\');
@@ -127,13 +127,13 @@ In this library. ';
         case 'example':
             // using a Model examples
 	
-			echo 'The Foo class contain a field $value, we use annotation @var to define that  this attributte is of integer type';
+			echo 'The Foo class contain a field $value, we use annotation @validate to define that  this attributte is of integer type';
 			highlight_string('
 			<?php 
 			class Foo extends Model 
 			{
 				/**
-				* @var int
+				* @validate int
 				*/
 				protected $value;
 				
@@ -170,17 +170,19 @@ In this library. ';
             }
 			var_dump($foo);
 			
-			echo '<br /><br />But, if $value was setted with a string value we would the next result:';
-			$foo->setValue('bar');
+			echo '<br /><br />But, if $value was setted with a string value we would a exception with a message <br />"Attribute "value" of class "Model\Foo" needs be a int type, this value is a string" <br /><br />';
+			/* // Try next code to view the exception message
+            $foo->setValue('bar');
 			try{
                 $foo->save();
             }catch(AnnotationValidationException $e){
                 echo $e->getMessage();
             }
-			var_dump($foo);
+			var_dump($foo);*/
 	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="https://github.com/Respect/Validation" target="_blank">read more</a>';
             break;
         default:
-			echo 'ERROR!';
+			echo 'PAGE NOT FOUND!';
 	}
+    echo '<br /><br /><a href="?">Back to home</a>';
 }
