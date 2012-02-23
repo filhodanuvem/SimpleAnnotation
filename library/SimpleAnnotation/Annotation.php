@@ -60,7 +60,7 @@ class Annotation
     {
         $name = 'SimpleAnnotation\Rules\\'.ucfirst($name);
         $rule = new $name ;
-        $rule->execute($this);
+        return $rule->execute($this);
     }
     
     public function getHash()

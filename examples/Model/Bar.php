@@ -17,7 +17,7 @@ class Bar extends Model {
 	}
 	
 	public function setDate($value){
-		$this->data = $value;
+		$this->date = $value;
 	}
 	
 	
