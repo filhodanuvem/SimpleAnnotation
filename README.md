@@ -1,4 +1,4 @@
-SimpleAnnotation 
+SimpleAnnotation [![Build Status](https://secure.travis-ci.org/cloudson/SimpleAnnotation.png?branch=master)](http://travis-ci.org/cloudson/SimpleAnnotation)
 ==================
 
 A small php project that insert semantic on classes using annotations.<br />
