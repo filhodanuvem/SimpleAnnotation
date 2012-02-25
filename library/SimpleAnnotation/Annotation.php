@@ -15,7 +15,6 @@ class Annotation
     protected $status;
     protected $blocks;
     /**
-    *
     * @var Cache
     */
     protected $cache ;
@@ -38,7 +37,8 @@ class Annotation
      * 
      * Create a array with all comments blocks 
      */
-    private function getAllDocs(){
+    private function getAllDocs()
+    {
     	$props = $this->reflection->getProperties();
     	$blocks = array();
     	foreach($props as $p){
@@ -48,7 +48,8 @@ class Annotation
     	return $blocks;
     }
     
-    public function execute(){
+    public function execute()
+    {
     	$this->properties = array();
     	foreach($this->blocks as $name => $block){
     		$this->properties[$name] = $this->parser->read($block);
@@ -93,7 +94,8 @@ class Annotation
         return $this->properties;
     }
     
-    public function getTarget(){
+    public function getTarget()
+    {
         return $this->target;
     }
 

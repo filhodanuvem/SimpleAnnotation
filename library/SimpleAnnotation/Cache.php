@@ -2,15 +2,17 @@
 /**
 * Class that work like a layer that block the library of the 
 * to process the comment blocks every request 
-* @TODO new names from methods
 * @author Claudson Oliveira
 *
 */
 namespace SimpleAnnotation;
-
 class Cache
 {
-	
+    private static $ident_block = 'block.cache';
+    private static $ident_prop  = 'prop.cache';  
+    private static $time_expire =  86400;
+    private static $port        =  540007;
+    
 	/**
 	 * 
 	 * Method that return the cache data from a Annotation  
@@ -19,7 +21,8 @@ class Cache
 	 */
 	public function getCacheBlock(Annotation $annot)
 	{
-		$folder = __DIR__.'/.cache/';
+        return \apc_fetch(md5($annot->getNameTarget()).self::$ident_block);
+		/*$folder = __DIR__.'/.cache/';
 		if(!is_dir($folder)){
 			return null;
 		}
@@ -29,12 +32,13 @@ class Cache
 			return null;	
 		}
 		
-		return file_get_contents($file);
+		return file_get_contents($file);*/
 	}
 	
 	public function getCache(Annotation $annot)
 	{
-		$folder = __DIR__.'/.cache/';
+        return apc_fetch(md5($annot->getNameTarget()).self::$ident_prop);
+		/*$folder = __DIR__.'/.cache/';
 		if(!is_dir($folder)){
 			return null;
 		}
@@ -44,11 +48,13 @@ class Cache
 			return null;
 		}
 	
-		return file_get_contents($file);
+		return file_get_contents($file);*/
 	}
 	
 	public function setCache(Annotation $annot){
-		$folder = __DIR__.'/cache/';
+		apc_add(md5($annot->getNameTarget()).self::$ident_block,$annot->getHashBlock(),self::$time_expire);
+        apc_add(md5($annot->getNameTarget()).self::$ident_prop,$annot->getHash(),self::$time_expire);
+        /*$folder = __DIR__.'/cache/';
 		if(!is_dir($folder)){
 			mkdir($folder);
 			chmod($folder,0744);
@@ -64,7 +70,7 @@ class Cache
 		fwrite($p, str_ireplace(' ', '',$annot->getHashBlock() ));
 		
 		$p = fopen($fileProp, 'w+');
-		fwrite($p, $annot->getHash());
+		fwrite($p, $annot->getHash());*/
 	}
 
 }
