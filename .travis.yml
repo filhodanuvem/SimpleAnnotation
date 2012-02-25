@@ -3,4 +3,9 @@ php:
     - 5.3
     - 5.4
 
-script: cd tests;phpunit  
+before_script:
+    - git submodule update
+ 
+script: 
+   - cd ./tests/  
+   - phpunit --bootstrap bootstrap.php
