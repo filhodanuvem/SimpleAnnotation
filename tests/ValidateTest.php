@@ -13,11 +13,11 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider providerValidatesFail
+     * @expectedException SimpleAnnotation\Exceptions\AnnotationValidationException
      */
     public function test_validates_fail($input)
     {
-        $this->assertNotEquals($input->validate(),true);
-        
+        $input->validate();
     }
     
     
