@@ -4,7 +4,8 @@ php:
     - 5.4
 
 before_script:
-    - sudo apt-get install php-apc  
+    - sudo apt-get install php-apc 
+    - echo "extension=php-apc.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` 
     - git submodule update --init
  
 script: 
