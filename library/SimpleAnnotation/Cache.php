@@ -12,6 +12,17 @@ class Cache
     private static $ident_prop  = 'prop.cache';  
     private static $time_expire =  86400;
     private static $port        =  540007;
+    private $apc = false;
+    
+    
+    public function __construct()
+    {
+        // project will to work without 
+        // apc library installed
+        if(function_exists('apc_add')){
+            $this->apc = true;
+        }
+    }
     
 	/**
 	 * 
@@ -21,8 +32,11 @@ class Cache
 	 */
 	public function getCacheBlock(Annotation $annot)
 	{
-        return \apc_fetch(md5($annot->getNameTarget()).self::$ident_block);
-		/*$folder = __DIR__.'/.cache/';
+        if($this->apc){
+            return \apc_fetch(md5($annot->getNameTarget()).self::$ident_block);
+        }
+        
+		$folder = __DIR__.'/.cache/';
 		if(!is_dir($folder)){
 			return null;
 		}
@@ -32,13 +46,16 @@ class Cache
 			return null;	
 		}
 		
-		return file_get_contents($file);*/
+		return file_get_contents($file);
 	}
 	
 	public function getCache(Annotation $annot)
-	{
-        return apc_fetch(md5($annot->getNameTarget()).self::$ident_prop);
-		/*$folder = __DIR__.'/.cache/';
+	{   
+        if($this->apc){
+            return apc_fetch(md5($annot->getNameTarget()).self::$ident_prop);
+        }
+		
+        $folder = __DIR__.'/.cache/';
 		if(!is_dir($folder)){
 			return null;
 		}
@@ -48,13 +65,16 @@ class Cache
 			return null;
 		}
 	
-		return file_get_contents($file);*/
+		return file_get_contents($file);
 	}
 	
 	public function setCache(Annotation $annot){
-		apc_add(md5($annot->getNameTarget()).self::$ident_block,$annot->getHashBlock(),self::$time_expire);
-        apc_add(md5($annot->getNameTarget()).self::$ident_prop,$annot->getHash(),self::$time_expire);
-        /*$folder = __DIR__.'/cache/';
+		if($this->apc){
+            apc_add(md5($annot->getNameTarget()).self::$ident_block,$annot->getHashBlock(),self::$time_expire);
+            apc_add(md5($annot->getNameTarget()).self::$ident_prop,$annot->getHash(),self::$time_expire);
+        }
+        
+        $folder = __DIR__.'/cache/';
 		if(!is_dir($folder)){
 			mkdir($folder);
 			chmod($folder,0744);
@@ -70,7 +90,7 @@ class Cache
 		fwrite($p, str_ireplace(' ', '',$annot->getHashBlock() ));
 		
 		$p = fopen($fileProp, 'w+');
-		fwrite($p, $annot->getHash());*/
+		fwrite($p, $annot->getHash());
 	}
 
 }

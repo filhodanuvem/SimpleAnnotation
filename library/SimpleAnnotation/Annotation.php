@@ -60,6 +60,8 @@ class Annotation
     public function __call($name,$attr)
     {
         $name = 'SimpleAnnotation\Rules\\'.ucfirst($name);
+        if(!class_exists($name))
+            throw new BadMethodCallException("Method {$name} not found! ");
         $rule = new $name ;
         return $rule->execute($this);
     }
