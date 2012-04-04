@@ -1,3 +1,4 @@
 #ignoring cached files#
 *.block.cache
 *.prop.cache
+vendor/
