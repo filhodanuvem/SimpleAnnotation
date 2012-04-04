@@ -65,7 +65,7 @@ class Annotation
         $rule = new $name ;
         return $rule->execute($this);
     }
-    
+    /* utils */
     public function getHash()
     {
     	return str_replace(' ', '',serialize($this->properties));
@@ -100,5 +100,38 @@ class Annotation
     {
         return $this->target;
     }
+    
+    /*metaprogrammer*/
+    
+    /**
+     *  get all annotations from attribute $attr 
+     */ 
+    public function getAnnotationsFrom($attr)
+    {
+		if(!isset($this->properties[$attr]))
+			return null;
+			
+		return $this->properties[$attr];
+	}
+	
+	
+    /**
+     *  get all attributes with certain annotations
+     */  
+    public function getAtributtesWith(/*mixed*/)
+    {
+		$rules = func_get_args();
+		$attributes = array();
+		foreach($rules as $rule){
+			foreach($this->properties as $property => $annotations){
+				if(!isset($annotations[$rule]))
+					continue;
+				
+				$attributes[$property] = $annotations[$rule];
+			}
+		}
+		
+		return $attributes;
+	}
 
 }

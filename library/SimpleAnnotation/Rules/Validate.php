@@ -1,14 +1,14 @@
 <?php
 
 namespace SimpleAnnotation\Rules;
-use SimpleAnnotation as s; 
-use SimpleAnnotation\Exceptions as ex; 
+use SimpleAnnotation\Annotation; 
+use SimpleAnnotation\Exceptions\AnnotationValidationException; 
 use Respect\Validation          as v;
 
-class Validate
+class Validate implements Rule
 {
     
-    public function execute(s\Annotation $annot)
+    public function execute(Annotation $annot)
     {
         foreach($annot->getProperties() as $attr => $p){
             if($p && array_key_exists('validate',$p)){
@@ -25,7 +25,7 @@ class Validate
         }
         $annot->setStatus($status);
         if(array_search(false,$annot->getStatus(),true))
-            throw new ex\AnnotationValidationException($annot->getTarget(),$annot->getProperties(),$annot->getStatus());
+            throw new AnnotationValidationException($annot->getTarget(),$annot->getProperties(),$annot->getStatus());
         return true;
     }
     
