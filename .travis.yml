@@ -9,6 +9,5 @@ before_script:
   
  
 script: 
-   - chmod -R 777 ./library/SimpleAnnotation/cache/
    - cd ./tests/  
    - phpunit --bootstrap bootstrap.php .
