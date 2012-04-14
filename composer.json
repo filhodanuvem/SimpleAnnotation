@@ -18,7 +18,8 @@
     },
     "autoload": {
         "psr-0": {
-            "SimpleAnnotation": "library\/"
+            "SimpleAnnotation": "library\/",
+            "Model" :  "examples\/"
         }
     }
 }
