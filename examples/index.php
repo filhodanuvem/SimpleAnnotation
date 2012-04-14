@@ -179,8 +179,13 @@ In this library. ';
                 echo $e->getMessage();
             }
 			var_dump($foo);*/
-	echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="https://github.com/Respect/Validation" target="_blank">read more</a>';
+	        echo '<br />The SimpleAnnotation used a Respect Validation for filter the field. <a href="https://github.com/Respect/Validation" target="_blank">read more</a>';
             break;
+        case 'test':
+           $foo = new m\Foo;
+           $v = new annot($foo);
+         //  $v->votar();
+           break;    
         default:
 			echo 'PAGE NOT FOUND!';
 	}
