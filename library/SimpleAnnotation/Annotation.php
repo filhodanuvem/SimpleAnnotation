@@ -118,7 +118,7 @@ class Annotation
     /**
      *  get all attributes with certain annotations
      */  
-    public function getAtributtesWith(/*mixed*/)
+    public function getAttributesWith(/*mixed*/)
     {
 		$rules = func_get_args();
 		$attributes = array();
