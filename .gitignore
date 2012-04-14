@@ -1,4 +1,5 @@
 #ignoring cached files#
+*.phar
 *.block.cache
 *.prop.cache
 vendor/
