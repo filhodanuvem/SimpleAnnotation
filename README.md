@@ -30,24 +30,27 @@ Installation
 **CAUTION**, this is not ready for production! Use it just for fun until a 
 stable version comes out.
 
-cd /var/www/ <br />
-git clone git@github.com:cloudson/SimpleAnnotation.git #cloning repo <br />
-cd SimpleAnnotation/  <br />
-git submodule init  <br />
-git submodule update  #updating Vendors <br />
+   cd /var/www/ <br />
+   git clone git@github.com:cloudson/SimpleAnnotation.git #cloning repo <br />
+   cd SimpleAnnotation/  <br />
+   git submodule init  <br />
+   git submodule update  #updating Vendors <br />
 
+Download requirements
+----------------------
+We'll use composer to manager our dependencies. 
+
+    curl -s http://getcomposer.org/installer | php
+    php composer.phar install 
+
+Now, we have all dependencies on project. 
 
 Autoloading
 -----------
-
-You can set up SimpleAnnotation for autoloading. We recommend using the 
-SplClassLoader. Here's a nice sample:
-    
-    set_include_path('/my/library' . PATH_SEPARATOR . '/path/to/respect' . PATH_SEPARATOR . get_include_path());
-    require_once 'SplClassLoader.php';
-    $myLoader = new \SplClassLoader();
-    $myLoader->register();
-
+We use, autoload.php generate by composer with
+   
+    <?php
+        require PATH_TO_VENDOR.'/autoload.php';   
 
 Feature Guide
 =============
