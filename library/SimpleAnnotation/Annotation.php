@@ -22,7 +22,7 @@ class Annotation
     {
         $this->target     = $target ;
         $this->parser     = new Parser(); 
-        $this->reflection = new \ReflectionClass($target);
+        $this->reflection = new ReflectionClass($target);
         $this->blocks     = $this->getAllDocs();
         $this->cache      = new Cache();
         $c = $this->cache->getCacheBlock($this);

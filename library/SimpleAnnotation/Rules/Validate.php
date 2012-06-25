@@ -3,7 +3,7 @@
 namespace SimpleAnnotation\Rules;
 use SimpleAnnotation\Annotation; 
 use SimpleAnnotation\Exceptions\AnnotationValidationException; 
-use Respect\Validation          as v;
+use Respect\Validation\Validator;
 
 class Validate implements Rule
 {
@@ -12,7 +12,7 @@ class Validate implements Rule
     {
         foreach($annot->getProperties() as $attr => $p){
             if($p && array_key_exists('validate',$p)){
-                $validator = new v\Validator();
+                $validator = new Validator();
                 try{
                     $validator = $validator->buildRule($p['validate']);
                 }catch(Exception $e){
