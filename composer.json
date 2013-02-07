@@ -1,0 +1,25 @@
+{
+    "name": "SimpleAnnotation",
+    "version": "0.1",
+    "type": "library",
+    "description": "A small PHP project that insert semantic on classes using annotations.",
+    "keywords": ["annotation", "filter"],
+    "homepage": "https://github.com/cloudson/SimpleAnnotation",
+    "license" : "",
+    "authors" : [
+        {
+            "name": "Claudson Oliveira",
+            "email": "claudsonweb@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "Respect/Validation":"*"
+    },
+    "autoload": {
+        "psr-0": {
+            "SimpleAnnotation": "library\/",
+            "Model" :  "examples\/"
+        }
+    }
+}
